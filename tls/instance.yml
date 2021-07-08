@@ -1,0 +1,30 @@
+instances:
+  - name: "elastic-client"
+    dns: 
+      - elasticsearch-client-headless
+      - elasticsearch-client-0.elasticsearch-master-headless
+      - elasticsearch-client
+      - elasticsearch-client.logging.svc
+      - elasticsearch-client.logging.svc.cluster.local
+      - localhost
+  - name: "elastic-master"
+    dns: 
+      - elasticsearch-master-headless
+      - elasticsearch-master-0.elasticsearch-master-headless
+      - elasticsearch-master-1.elasticsearch-master-headless
+      - elasticsearch-master
+      - elasticsearch-master.logging.svc
+      - elasticsearch-master.logging.svc.cluster.local
+      - localhost
+  - name: "elastic-data"
+    dns: 
+      - elasticsearch-data-headless
+      - elasticsearch-data-0.elasticsearch-master-headless
+      - elasticsearch-data-1.elasticsearch-master-headless
+      - elasticsearch-data-2.elasticsearch-master-headless
+      - elasticsearch-data
+      - elasticsearch-data.logging.svc
+      - elasticsearch-data.logging.svc.cluster.local
+      - localhost
+  - name: 'kibana'
+    dns: [ 'es-kibana-kibana','es-kibana-kibana.logging.svc','es-kibana-kibana.logging.svc.cluster.local','localhost' ]

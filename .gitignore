@@ -1,10 +1,12 @@
 # Compiled Lua sources
 luac.out
+.vs
 
 # luarocks build files
 *.src.rock
 *.zip
 *.tar.gz
+
 
 # Object files
 *.o
