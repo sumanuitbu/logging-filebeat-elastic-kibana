@@ -1,5 +1,5 @@
 ---
-elasticsearchHosts: "https://elasticsearch-master:9200"
+elasticsearchHosts: "https://elasticsearch-client:9200"
 
 replicas: 1
 
@@ -31,10 +31,10 @@ secretMounts:
     secretName: elastic-ca
     path: /etc/pki/root
     defaultMode: 0755
-#  - name: kibana-keystore
-#    secretName: kibana-keystore
-#    path: /usr/share/kibana/data/kibana.keystore
-#    subPath: kibana.keystore # optional
+  - name: kibana-certificates
+    secretName: kibana-certificates
+    path: /usr/share/kibana/config/certs
+
 
 image: "docker.elastic.co/kibana/kibana"
 imageTag: "7.8.1"
@@ -54,7 +54,7 @@ resources:
     cpu: "1000m"
     memory: "2Gi"
 
-protocol: http
+protocol: https
 
 serverHost: "0.0.0.0"
 
@@ -68,8 +68,11 @@ kibanaConfig:
      elasticsearch.username: "elastic"
      elasticsearch.password: "elasticelastic"
      elasticsearch.ssl.certificateAuthorities: ["/etc/pki/root/ca.pem"]
-#     key:
-#       nestedkey: value
+     server.ssl.enabled: true
+     server.ssl.certificate: /usr/share/kibana/config/certs/kibana.crt
+     server.ssl.key: /usr/share/kibana/config/certs/kibana.key
+
+
 
 # If Pod Security Policy in use it may be required to specify security context as well as service account
 

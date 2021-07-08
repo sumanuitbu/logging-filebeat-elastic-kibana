@@ -15,7 +15,7 @@ filebeatConfig:
               logs_path: "/var/log/containers/"
     output.elasticsearch:
       host: '${NODE_NAME}'
-      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-client:9200}'
       protocol: "https"
       ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
       username: "elastic" 

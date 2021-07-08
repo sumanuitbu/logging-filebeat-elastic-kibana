@@ -31,7 +31,7 @@ helm repo list
 ### Generate elastic certificates
 
 Elscticsearch support certificates in both formats .p12 and .crt.
-We will test oout both ways - 
+We will test out both ways - 
 
 **PKCS#12 format**
 
@@ -89,6 +89,8 @@ kubectl -n logging create secret generic elastic-ca --from-file=tls/ca/ca.pem
 kubectl -n logging delete secret `
   elastic-client-certificates `
   elastic-data-certificates `
+  elastic-master-certificates `
+  kibana-certificates `
   elastic-ca 
 
 ```
@@ -112,6 +114,11 @@ docker run -it --rm `
 unzip /tls/certs.zip  -d /tls/
 
 openssl x509 -in /tls/ca/ca.crt -out /tls/ca/ca.pem -outform PEM
+
+
+openssl x509 -in /tls/kibana/kibana.crt -out /tls/kibana/kibana.pem -outform PEM
+openssl rsa -in /tls/kibana/kibana.key -out /tls/kibana/kibana.key.pem -outform PEM
+
 
 ### cleanup
 
@@ -143,11 +150,18 @@ kubectl -n logging create secret generic elastic-master-certificates `
 kubectl -n logging create secret generic elastic-ca `
   --from-file=tls/ca/ca.pem
 
+kubectl -n logging create secret generic kibana-certificates `
+  --from-file=tls/kibana/kibana.crt `
+  --from-file=tls/kibana/kibana.key 
+
+
 ### cleanup
 
 kubectl -n logging delete secret `
   elastic-client-certificates `
   elastic-data-certificates `
+  elastic-master-certificates `
+  kibana-certificates `
   elastic-ca 
 
 ```
